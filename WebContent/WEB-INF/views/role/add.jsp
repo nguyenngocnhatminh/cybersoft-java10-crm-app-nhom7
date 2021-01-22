@@ -54,7 +54,7 @@
 						</div>
 						<div class="ml-auto" >
 							<button type = "submit"
-								class="btn btn-light"> Tạo mới</button>
+								class="btn btn-light"> Hoàn tất</button>
 						</div>
 					</div>
 				</div>

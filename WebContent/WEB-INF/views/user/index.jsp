@@ -3,7 +3,7 @@
 <%@ page import="com.cybersoft.nhom7.util.Path"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <head>
-<title>Quản lý quyền</title>
+<title>Quản lý người dùng</title>
 <link type="text/css"
 	href="<c:url value="/assets/css/vendor-flatpickr.css" />"
 	rel="stylesheet" />
@@ -26,10 +26,10 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb mb-0">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Role</li>
+							<li class="breadcrumb-item active" aria-current="page">User</li>
 						</ol>
 					</nav>
-					<h1 class="m-0">Quản lý quyền</h1>
+					<h1 class="m-0">Quản lý người dùng</h1>
 				</div>
 				<div class="ml-auto">
 					<a href="<%=request.getContextPath()+Path.ROLE_ADD %>" class="btn btn-light"> Tạo mới</a>
@@ -58,33 +58,33 @@
 							<thead class="bg-white">
 								<tr>
 									<th><a href="javascript:void(0)" class="sort"
-										data-sort="js-lists-values-employee-title">Tên quyền</a></th>
+										data-sort="js-lists-values-employee-title">Nhân viên</a></th>
 									<th><a href="javascript:void(0)" class="sort"
-										data-sort="js-lists-values-employee-title">Mô tả</a></th>
+										data-sort="js-lists-values-employee-title">Username</a></th>
+									<th></th>
+									<th><a href="javascript:void(0)" class="sort"
+										data-sort="js-lists-values-employee-title">Email</a></th>
+									<th>Địa chỉ</th>
+									<th>Số điện thoại</th>
+									<th>Quyền</th>
 									<th></th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody class="list" id="staff">
-								<c:forEach items= "${roles}" var ="role">
 								<tr class="selected">
-
 									<td>
 										<div class="media align-items-center">
 											<div class="media-body">
-												<span class="js-lists-values-employee-name">${role.name}</span>
-
+												<span class="js-lists-values-employee-name"></span>
 											</div>
 										</div>
 
 									</td>
-
-							
-									<td><span class="badge badge-warning">${role.description}</span></td>
-									<td><a href="<%=request.getContextPath()+Path.ROLE_EDIT%>?id=${role.id}" class="text-muted"><i class="fas fa-edit"></i></a></td>
-									<td><a href="<%=request.getContextPath()+Path.ROLE_DELETE%>?id=${role.id}" class="text-muted"><i class="fas fa-trash-alt"></i></a></td>
+									<td><span class="badge badge-warning"></span></td>
+									<td><a href="<%=request.getContextPath()+Path.ROLE_EDIT%>?id=" class="text-muted"><i class="fas fa-edit"></i></a></td>
+									<td><a href="<%=request.getContextPath()+Path.ROLE_DELETE%>?id=" class="text-muted"><i class="fas fa-trash-alt"></i></a></td>
 								</tr>
-								</c:forEach>
 							</tbody>
 						</table>
 					</div>
