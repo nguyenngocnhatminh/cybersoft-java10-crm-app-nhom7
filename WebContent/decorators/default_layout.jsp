@@ -32,7 +32,7 @@
 	    </div>
 	    <!-- // END Header Layout -->
 	
-	    <jsp:include page="/decorators/components/navigation_slide.jsp" />
+<%-- 	    <jsp:include page="/decorators/components/navigation_slide.jsp" /> --%>
 	    <jsp:include page="/decorators/components/footer.jsp" />
 
 	</body>
