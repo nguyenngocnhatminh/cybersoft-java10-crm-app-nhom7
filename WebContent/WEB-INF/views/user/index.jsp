@@ -32,19 +32,24 @@
 					<h1 class="m-0">Quản lý người dùng</h1>
 				</div>
 				<div class="ml-auto">
-					<a href="<%=request.getContextPath()+Path.ROLE_ADD %>" class="btn btn-light"> Tạo mới</a>
+					<a href="<%=request.getContextPath() + Path.USER_ADD%>"
+						class="btn btn-light"> Tạo mới</a>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="container page__container">
 		<!-- Page Content -->
-		<div class="card card-form" >
+		<div class="card card-form">
 			<div class="row no-gutters">
-				<%if(request.getAttribute("message") != null) {%>
-					<h3 class = "text-danger"><%=request.getAttribute("message") %></h3>
-				<%} %>
-				<div class="col-lg-12 card-form__body border-left" >
+				<%
+					if (request.getAttribute("message") != null) {
+				%>
+				<h3 class="text-danger"><%=request.getAttribute("message")%></h3>
+				<%
+					}
+				%>
+				<div class="col-lg-12 card-form__body border-left">
 					<div class="search-form search-form--light m-3">
 						<input type="text" class="form-control search"
 							placeholder="Search">
@@ -57,11 +62,10 @@
 						<table class="table mb-0 thead-border-top-0">
 							<thead class="bg-white">
 								<tr>
-									<th><a href="javascript:void(0)" class="sort"
+									<th ><a href="javascript:void(0)" class="sort"
 										data-sort="js-lists-values-employee-title">Nhân viên</a></th>
 									<th><a href="javascript:void(0)" class="sort"
 										data-sort="js-lists-values-employee-title">Username</a></th>
-									<th></th>
 									<th><a href="javascript:void(0)" class="sort"
 										data-sort="js-lists-values-employee-title">Email</a></th>
 									<th>Địa chỉ</th>
@@ -72,19 +76,35 @@
 								</tr>
 							</thead>
 							<tbody class="list" id="staff">
-								<tr class="selected">
-									<td>
-										<div class="media align-items-center">
-											<div class="media-body">
-												<span class="js-lists-values-employee-name"></span>
+							<c:forEach items = "${users }" var = "user">
+									<tr class="selected">
+										<td>
+											<div class="media align-items-center">
+												<div class="avatar avatar-xs mr-2">
+													<img src="<c:url value="${user.avatar}" />" 
+														 class="avatar-img rounded-circle">
+												</div>
+												<div class="media-body">
+	
+													<span class="js-lists-values-employee-name">${user.fullname }</span>
+	
+												</div>
 											</div>
-										</div>
-
-									</td>
-									<td><span class="badge badge-warning"></span></td>
-									<td><a href="<%=request.getContextPath()+Path.ROLE_EDIT%>?id=" class="text-muted"><i class="fas fa-edit"></i></a></td>
-									<td><a href="<%=request.getContextPath()+Path.ROLE_DELETE%>?id=" class="text-muted"><i class="fas fa-trash-alt"></i></a></td>
+	
+										</td>
+									<td>${user.username }</td>
+									<td>${user.email }</td>
+									<td>${user.address }</td>
+									<td>${user.phone }</td>
+									<td>${user.roledes }</td>
+									<td><a
+										href="<%=request.getContextPath() + Path.USER_EDIT%>?id=${user.id}"
+										class="text-muted"><i class="fas fa-edit"></i></a></td>
+									<td><a
+										href="<%=request.getContextPath() + Path.USER_DELETE%>?id=${user.id}"
+										class="text-muted"><i class="fas fa-trash-alt"></i></a></td>
 								</tr>
+							</c:forEach>
 							</tbody>
 						</table>
 					</div>

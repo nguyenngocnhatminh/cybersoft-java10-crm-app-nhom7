@@ -1,6 +1,8 @@
 <%@page import="com.cybersoft.nhom7.util.Path"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,29 +48,6 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Avatar</label>
-									<div class="dz-clickable media align-items-center"
-										data-toggle="dropzone" data-dropzone-url="http://"
-										data-dropzone-clickable=".dz-clickable"
-										data-dropzone-files='["<%=request.getContextPath()%>/assets/images/account-add-photo.svg"]'>
-										<div class="dz-preview dz-file-preview dz-clickable mr-3">
-											<div class="avatar" style="width: 80px; height: 80px;">
-												<img
-													src="<%=request.getContextPath()%>/assets/images/account-add-photo.svg"
-													class="avatar-img rounded" alt="..." data-dz-thumbnail>
-											</div>
-										</div>
-										<div class="media-body">
-											<button class="btn btn-sm btn-primary dz-clickable"  >Choose
-												photo</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
 									<label for="fname">Tên đăng nhập</label> <input name="username"
 										type="text" class="form-control" placeholder="Username">
 								</div>
@@ -76,7 +55,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="fname">Mật khẩu</label> <input name="password"
-										type="password" class="form-control" placeholder="Username">
+										type="password" class="form-control" placeholder="Password">
 								</div>
 							</div>
 						</div>
@@ -103,8 +82,8 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="fname">Số điện thoại</label> <input name="sdt"
-										type="text" class="form-control" placeholder="Email">
+									<label for="fname">Số điện thoại</label> <input name="phone"
+										type="text" class="form-control" placeholder="Phone">
 								</div>
 							</div>
 						</div>
@@ -113,7 +92,9 @@
 								<div class="form-group">
 									<label for="fname">Quyền</label> <select name="roleid"
 										class="form-control">
-										<option value="">Quản trị hệ thống</option>
+										<c:forEach items="${roles}" var = "role">
+											<option value="${role.id }">${role.description}</option>
+										</c:forEach>
 									</select>
 								</div>
 							</div>
@@ -121,7 +102,9 @@
 						</div>
 
 						<div class="row">
-							<button type="submit" class="btn btn-light">Hoàn tất</button>
+							<div class="col-md-6">
+								<button type="submit" class="btn btn-light">Hoàn tất</button>
+							</div>
 						</div>
 					</div>
 				</div>

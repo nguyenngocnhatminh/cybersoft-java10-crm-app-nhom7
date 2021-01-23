@@ -9,11 +9,33 @@ public class UserDto {
 	private String fullname;
 	private String phone;
 	private int roleid;
-	private String rolename;
-	private String roledes;
+	private String avatar;
+	
+	
+	
 	public UserDto() {
 	}
-	
+
+	public UserDto(String username, String password, String email, String address, String fullname, String phone,
+			int roleid) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.address = address;
+		this.fullname = fullname;
+		this.phone = phone;
+		this.roleid = roleid;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+	private String rolename;
+	private String roledes;
 	public int getId() {
 		return id;
 	}

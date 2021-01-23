@@ -1,5 +1,7 @@
 package com.cybersoft.nhom7.model;
 
+import com.cybersoft.nhom7.dto.UserDto;
+
 public class User {
 	private int id;
 	private String username;
@@ -9,11 +11,11 @@ public class User {
 	private String fullname;
 	private String phone;
 	private int roleid;
+	private String avatar;
 	public User() {
 	}
 	public User(int id, String username, String password, String email, String address, String fullname, String phone,
-			int roleid) {
-		super();
+			int roleid,String avatar) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -22,10 +24,10 @@ public class User {
 		this.fullname = fullname;
 		this.phone = phone;
 		this.roleid = roleid;
+		this.avatar = avatar;
 	}
 	public User(String username, String password, String email, String address, String fullname, String phone,
-			int roleid) {
-		super();
+			int roleid, String avatar) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
@@ -33,6 +35,27 @@ public class User {
 		this.fullname = fullname;
 		this.phone = phone;
 		this.roleid = roleid;
+		this.avatar = avatar;
+	}
+	
+	public User(UserDto dto)
+	{
+		this.id = dto.getId();
+		this.username = dto.getUsername();
+		this.email = dto.getEmail();
+		this.password = dto.getPassword();
+		this.fullname = dto.getFullname();
+		this.phone = dto.getPhone();
+		this.roleid = dto.getRoleid();
+		this.address = dto.getAddress();
+		this.avatar = dto.getAvatar();
+	}
+	
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 	public int getId() {
 		return id;

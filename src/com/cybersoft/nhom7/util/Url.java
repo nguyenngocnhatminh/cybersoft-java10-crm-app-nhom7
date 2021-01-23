@@ -11,5 +11,5 @@ public class Url {
 	//user
 	public static final String URL_USER_INDEX 	= 	"/WEB-INF/views/user/index.jsp";
 	public static final String URL_USER_ADD		= 	"/WEB-INF/views/user/add.jsp";
-	public static final String URL_USER_EDIT	=	"/WEB-INF/views/user/delete.jsp";
+	public static final String URL_USER_EDIT	=	"/WEB-INF/views/user/edit.jsp";
 }

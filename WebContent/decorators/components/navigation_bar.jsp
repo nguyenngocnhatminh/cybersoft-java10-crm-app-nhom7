@@ -15,20 +15,17 @@
 					<li class="nav-item"><a class="nav-link active"
 						href="<c:url value="<%-- <%=Path.HOME %> --%>" />"> Dashboard
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath() + Path.ROLE_INDEX%>">Role</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="<%=request.getContextPath() + Path.ROLE_INDEX%>">Role</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="<%=request.getContextPath() + Path.USER_INDEX%>">User</a></li>
+
 					<li class="nav-item dropdown"><a href="#"
 						class="nav-link dropdown-toggle" data-toggle="dropdown">
 							Project </a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="#"> Manage Project </a> <a
 								class="dropdown-item" href="#"> Project Create Project </a>
-						</div></li>
-					<li class="nav-item dropdown"><a href="#"
-						class="nav-link dropdown-toggle" data-toggle="dropdown"> User
-					</a>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#"> User List </a> <a
-								class="dropdown-item" href="#"> Create User </a>
 						</div></li>
 					<li class="nav-item"><a class="nav-link" href="#">Task</a></li>
 				</ul>
