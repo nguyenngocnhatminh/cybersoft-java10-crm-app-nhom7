@@ -61,6 +61,36 @@ public class UserRepository {
 				user.setEmail(rs.getString("email"));
 				user.setAddress(rs.getString("address"));
 				user.setFullname(rs.getString("fullname"));
+				user.setAvatar(rs.getString("avatar"));
+				user.setPhone(rs.getString("phone"));
+				user.setRoleid(rs.getInt("roleId"));
+				return user;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+	
+	public UserDto getUserByUsername(String username)
+	{
+		Connection connection = MySqlConnection.getConnection();
+		String query = "Select * from USER where username = ?";
+		UserDto user = null;
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, username);
+			ResultSet rs = statement.executeQuery();
+			while (rs.next())
+			{
+				user = new UserDto();
+				user.setId(rs.getInt("id"));
+				user.setPassword(rs.getString("password"));
+				user.setUsername(rs.getString("username"));
+				user.setEmail(rs.getString("email"));
+				user.setAddress(rs.getString("address"));
+				user.setFullname(rs.getString("fullname"));
+				user.setAvatar(rs.getString("avatar"));
 				user.setPhone(rs.getString("phone"));
 				user.setRoleid(rs.getInt("roleId"));
 				return user;

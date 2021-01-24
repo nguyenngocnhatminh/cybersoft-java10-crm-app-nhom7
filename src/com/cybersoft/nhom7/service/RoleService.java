@@ -34,6 +34,13 @@ public class RoleService {
 		return dto;
 	}
 	
+	public RoleDto getRoleByName(String name)
+	{
+		Role role = repository.getRoleByName(name);
+		RoleDto dto = new RoleDto(role);
+		return dto;
+	}
+	
 	public int save(RoleDto dto)
 	{
 		Role role = new Role(dto);

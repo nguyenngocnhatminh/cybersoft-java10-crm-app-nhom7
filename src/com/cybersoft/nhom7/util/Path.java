@@ -2,6 +2,12 @@ package com.cybersoft.nhom7.util;
 
 public class Path {
 	public static final String ROOT 		= 	"/*";
+	//home
+	public static final String HOME			=	"/home";
+	//auth
+	public static final String LOGIN		=	"/login";
+	public static final String SIGNUP		=	"/signup";
+	public static final String LOGOUT		=	"/logout";
 	//role
 	public static final String ROLE_INDEX	=	"/role";
 	public static final String ROLE_ADD		=	"/role/add";

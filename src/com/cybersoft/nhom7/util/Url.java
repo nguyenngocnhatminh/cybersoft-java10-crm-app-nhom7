@@ -2,6 +2,12 @@ package com.cybersoft.nhom7.util;
 
 public class Url {
 	public static final String DashBoard = "/WEB-INF/views/dashboard.jsp";
+	//home
+	public static final String URL_HOME			=	"/WEB-INF/views/dashboard.jsp";
+	
+	//auth
+	public static final String URL_LOGIN		=	"/WEB-INF/views/auth/login.jsp";
+	public static final String URL_SIGNUP		=	"/WEB-INF/views/auth/signup.jsp";
 	
 	//role
 	public static final String URL_ROLE_INDEX 	= 	"/WEB-INF/views/role/index.jsp";

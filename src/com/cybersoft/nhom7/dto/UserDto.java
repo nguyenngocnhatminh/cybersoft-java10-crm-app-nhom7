@@ -14,8 +14,15 @@ public class UserDto {
 	
 	
 	public UserDto() {
+		username = "";
+		password = "";
+		address = "";
+		fullname = "";
+		phone = "";
+		roleid = 1;
+		avatar = "/assets/images/avatars/default.jpg";
 	}
-
+	
 	public UserDto(String username, String password, String email, String address, String fullname, String phone,
 			int roleid) {
 		this.username = username;

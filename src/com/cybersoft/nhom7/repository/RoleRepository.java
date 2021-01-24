@@ -34,6 +34,28 @@ public class RoleRepository {
 		return roles;
 	}
 	
+	public Role getRoleByName(String name)
+	{
+		Connection connection = MySqlConnection.getConnection();
+		String query = "Select * from ROLE where name = ?";
+		Role role = null;
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, name);
+			ResultSet rs = statement.executeQuery();
+			while (rs.next())
+			{
+				role = new Role();
+				role.setId(rs.getInt("id"));
+				role.setName(rs.getString("name"));
+				role.setDescription(rs.getString("description"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return role;
+	}
+	
 	public Role getRoleById(int id)
 	{
 		Connection connection = MySqlConnection.getConnection();
