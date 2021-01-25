@@ -19,14 +19,8 @@
 						href="<%=request.getContextPath() + Path.ROLE_INDEX%>">Role</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="<%=request.getContextPath() + Path.USER_INDEX%>">User</a></li>
-
-					<li class="nav-item dropdown"><a href="#"
-						class="nav-link dropdown-toggle" data-toggle="dropdown">
-							Project </a>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#"> Manage Project </a> <a
-								class="dropdown-item" href="#"> Project Create Project </a>
-						</div></li>
+					<li class="nav-item"><a class="nav-link"
+						href="<%=request.getContextPath() + Path.PROJECT_INDEX%>">Project</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Task</a></li>
 				</ul>
 			</div>

@@ -28,7 +28,7 @@ public class AuthFilter implements Filter {
 		HttpSession session = req.getSession();
 		UserDto dto = (UserDto)session.getAttribute("USER_LOGIN");
 		
-		if(path.startsWith(Path.LOGIN) || path.startsWith(Path.SIGNUP))
+		if(path.startsWith(Path.LOGIN) || path.startsWith(Path.SIGNUP) || path.startsWith(Path.ASSETS))
 		{
 			chain.doFilter(request, response);
 			return;

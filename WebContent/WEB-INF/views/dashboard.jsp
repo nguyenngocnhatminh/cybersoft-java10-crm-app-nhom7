@@ -6,10 +6,10 @@
 
 <head>
     <title>Dashboard</title>
-    <link type="text/css" href="assets/css/vendor-flatpickr.css" rel="stylesheet" />
-    <link type="text/css" href="assets/css/vendor-flatpickr.rtl.css" rel="stylesheet" />
-    <link type="text/css" href="assets/css/vendor-flatpickr-airbnb.css" rel="stylesheet" />
-    <link type="text/css" href="assets/css/vendor-flatpickr-airbnb.rtl.css" rel="stylesheet" />
+    <link type="text/css" href="<c:url value = "assets/css/vendor-flatpickr.css"/>" rel="stylesheet" />
+    <link type="text/css" href="<c:url value = "assets/css/vendor-flatpickr.rtl.css"/>" rel="stylesheet" />
+    <link type="text/css" href="<c:url value = "assets/css/vendor-flatpickr-airbnb.css"/>" rel="stylesheet" />
+    <link type="text/css" href="<c:url value = "assets/css/vendor-flatpickr-airbnb.rtl.css"/>" rel="stylesheet" />
 </head>
 
 <body>
@@ -253,8 +253,8 @@
             </div>
         </div>
        	<!-- Flatpickr -->
-		<script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
-		<script src="assets/js/flatpickr.js"></script>
+		<script src="<c:url value = "assets/vendor/flatpickr/flatpickr.min.js"/>"></script>
+		<script src="<c:url value ="assets/js/flatpickr.js"/>"></script>
 </body>
 
 </html>
