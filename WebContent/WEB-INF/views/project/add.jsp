@@ -78,7 +78,8 @@
 
 <link rel="stylesheet"
 	href="<c:url value ="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"/>">
-<script src="<c:url value ="https://code.jquery.com/jquery-3.2.1.slim.min.js"/>"
+<script
+	src="<c:url value ="https://code.jquery.com/jquery-3.2.1.slim.min.js"/>"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	crossorigin="anonymous"></script>
 <script
@@ -139,8 +140,8 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="fname">Mô tả</label>
-									<div style="height: 150px;" data-toggle="quill"
-										data-quill-placeholder="Description"></div>
+									<input name="description"
+										type="text" class="form-control" placeholder="Description">
 								</div>
 							</div>
 						</div>
@@ -148,43 +149,22 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="fname">Ngày bắt đầu</label> <input
-										id="flatpickrSample01" name="startdate" type="text"
-										class="form-control" placeholder="Start date"
-										data-toggle="flatpickr" value="">
+										id="flatpickrSample01" type="text" class="form-control"
+										placeholder="Flatpickr example" data-toggle="flatpickr"
+										name = "startdate" value="">
+
 
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="fname">Ngày kết thúc</label><input
-										id="flatpickrSample01" name="enddate" type="text"
-										class="form-control" placeholder="End date"
-										data-toggle="flatpickr" value="">
+									<label for="fname">Ngày kết thúc</label> <input
+										id="flatpickrSample01" type="text" class="form-control"
+										placeholder="Flatpickr example" data-toggle="flatpickr"
+										name ="enddate" value="">
+
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label for="fname">Thành viên</label> <input list="members"
-										id="members" class="form-control">
-									<datalist id="members">
-										<option value="Edge">
-										<option value="Firefox">
-										<option value="Chrome">
-										<option value="Opera">
-										<option value="Safari">
-									</datalist>
-									<input type='button' value='Thêm thành viên' id='add' />
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<input class="form-control" placeholder="Members" id="member"
-									name="member">
-							</div>
-							
 						</div>
 						<div class="row">
 							<div class="col-md-6">

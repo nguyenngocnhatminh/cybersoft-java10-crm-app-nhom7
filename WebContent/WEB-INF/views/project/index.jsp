@@ -32,19 +32,24 @@
 					<h1 class="m-0">Quản lý dự án</h1>
 				</div>
 				<div class="ml-auto">
-					<a href="<%=request.getContextPath()+Path.PROJECT_ADD %>" class="btn btn-light"> Tạo mới</a>
+					<a href="<%=request.getContextPath() + Path.PROJECT_ADD%>"
+						class="btn btn-light"> Tạo mới</a>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="container page__container">
 		<!-- Page Content -->
-		<div class="card card-form" >
+		<div class="card card-form">
 			<div class="row no-gutters">
-				<%if(request.getAttribute("message") != null) {%>
-					<h3 class = "text-danger"><%=request.getAttribute("message") %></h3>
-				<%} %>
-				<div class="col-lg-12 card-form__body border-left" >
+				<%
+					if (request.getAttribute("message") != null) {
+				%>
+				<h3 class="text-danger"><%=request.getAttribute("message")%></h3>
+				<%
+					}
+				%>
+				<div class="col-lg-12 card-form__body border-left">
 					<div class="search-form search-form--light m-3">
 						<input type="text" class="form-control search"
 							placeholder="Search">
@@ -59,34 +64,68 @@
 								<tr>
 									<th><a href="javascript:void(0)" class="sort"
 										data-sort="js-lists-values-employee-title">Tên dự án</a></th>
-									<th><a href="javascript:void(0)" class="sort"
-										data-sort="js-lists-values-employee-title">Mô tả</a></th>
-									<th></th>
+									<th>Mô tả</th>
 									<th>Ngày bắt đầu</th>
 									<th>Ngày kết thúc</th>
 									<th>Người tạo</th>
 									<th></th>
+									<th></th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody class="list" id="staff">
-								<c:forEach items= "${roles}" var ="role">
-								<tr class="selected">
+								<c:forEach items="${projects}" var="project">
+									<tr class="selected">
+										<td>
+											<div class="media align-items-center">
+												<div class="media-body">
+													<span class="js-lists-values-employee-name">${project.name}</span>
 
-									<td>
-										<div class="media align-items-center">
-											<div class="media-body">
-												<span class="js-lists-values-employee-name">${role.name}</span>
-
+												</div>
 											</div>
-										</div>
+										</td>
+										<td>
+											<div class="media align-items-center">
+												<div class="media-body">
+													<span class="js-lists-values-employee-name">${project.description}</span>
 
-									</td>
+												</div>
+											</div>
+										</td>
+										<td>
+											<div class="media align-items-center">
+												<div class="media-body">
+													<span class="js-lists-values-employee-name">${project.startdate}</span>
 
-							
-									<td><span class="badge badge-warning">${role.description}</span></td>
-									<td><a href="<%=request.getContextPath()+Path.ROLE_EDIT%>?id=${role.id}" class="text-muted"><i class="fas fa-edit"></i></a></td>
-									<td><a href="<%=request.getContextPath()+Path.ROLE_DELETE%>?id=${role.id}" class="text-muted"><i class="fas fa-trash-alt"></i></a></td>
-								</tr>
+												</div>
+											</div>
+										</td>
+										<td>
+											<div class="media align-items-center">
+												<div class="media-body">
+													<span class="js-lists-values-employee-name">${project.enddate}</span>
+												</div>
+											</div>
+										</td>
+										<td>
+											<div class="media align-items-center">
+												<div class="media-body">
+													<span class="js-lists-values-employee-name">${project.createusername}</span>
+												</div>
+											</div>
+										</td>
+										<td><a
+											href="<%=request.getContextPath()+Path.PROJECT_DELETE%>?id=${project.id}"
+											class="text-muted"><i class="fas fa-user-plus"></i></a></td>
+										<td><span class="badge badge-warning">${role.description}</span></td>
+										<td><a
+											href="<%=request.getContextPath()+Path.PROJECT_EDIT%>?id=${project.id}"
+											class="text-muted"><i class="fas fa-edit"></i></a></td>
+										<td><a
+											href="<%=request.getContextPath()+Path.PROJECT_DELETE%>?id=${project.id}"
+											class="text-muted"><i class="fas fa-trash-alt"></i></a></td>
+
+									</tr>
 								</c:forEach>
 							</tbody>
 						</table>

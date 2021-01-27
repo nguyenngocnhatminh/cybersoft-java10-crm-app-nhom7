@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.cybersoft.nhom7.dto.UserDto;
 import com.cybersoft.nhom7.jdbc.MySqlConnection;
-import com.cybersoft.nhom7.model.Role;
 import com.cybersoft.nhom7.model.User;
 
 public class UserRepository {

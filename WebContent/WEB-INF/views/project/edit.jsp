@@ -75,6 +75,21 @@
 <link type="text/css"
 	href="<c:url value ="assets/css/vendor-quill.rtl.css"/>"
 	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="<c:url value ="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"/>">
+<script
+	src="<c:url value ="https://code.jquery.com/jquery-3.2.1.slim.min.js"/>"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="<c:url value ="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"/>"
+	integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+	crossorigin="anonymous"></script>
+<script
+	src="<c:url value ="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"/>"
+	integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="container page__heading-container">
@@ -112,11 +127,12 @@
 						<%
 							}
 						%>
+						<input type = "hidden" name ="id" value = "${project.id }">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="fname">Tên dự án</label> <input name="name"
-										type="text" class="form-control" placeholder="Project name">
+										type="text" class="form-control" value="${project.name }" placeholder="Project name">
 								</div>
 							</div>
 
@@ -125,8 +141,8 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="fname">Mô tả</label>
-									<div style="height: 150px;" data-toggle="quill"
-										data-quill-placeholder="Description"></div>
+									<input name="description"
+										type="text" class="form-control" value ="${project.description }" placeholder="Description">
 								</div>
 							</div>
 						</div>
@@ -134,37 +150,23 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="fname">Ngày bắt đầu</label> <input
-										id="flatpickrSample01" name="startdate" type="text"
-										class="form-control" placeholder="Start date"
-										data-toggle="flatpickr" value="">
+										id="flatpickrSample01" type="text" class="form-control"
+										placeholder="Flatpickr example" data-toggle="flatpickr"
+										name = "startdate" value="${project.startdate }">
+
 
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="fname">Ngày kết thúc</label><input
-										id="flatpickrSample01" name="enddate" type="text"
-										class="form-control" placeholder="End date"
-										data-toggle="flatpickr" value="">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label for="fname">Thành viên</label> <input list="browsers"
-										name="browser" class = "form-control" id="browser">
-									<datalist id="browsers">
-										<option value="Edge">
-										<option value="Firefox">
-										<option value="Chrome">
-										<option value="Opera">
-										<option value="Safari">
-									</datalist>
-								</div>
-							</div>
-						</div>
+									<label for="fname">Ngày kết thúc</label> <input
+										id="flatpickrSample01" type="text" class="form-control"
+										placeholder="Flatpickr example" data-toggle="flatpickr"
+										name ="enddate" value="${project.enddate }">
 
+								</div>
+							</div>
+						</div>
 						<div class="row">
 							<div class="col-md-6">
 								<button type="submit" class="btn btn-light">Hoàn tất</button>
@@ -186,6 +188,7 @@
       'mini': 'mini-dashboard.html'}">
 		</app-settings>
 	</div>
+
 	<!-- jQuery -->
 	<script src="<c:url value ="/assets/vendor/jquery.min.js"/>"></script>
 
