@@ -79,11 +79,11 @@
 								Member</li>
 						</ol>
 					</nav>
-					<h1 class="m-0">Quản lý thành viên của project</h1>
+					<h1 class="m-0">Quản lý thành viên của dự án</h1>
 				</div>
 				<div class="ml-auto">
 					<a href="<%=request.getContextPath() + Path.PROJECT_INDEX%>"
-						class="btn btn-light"> Lưu</a>
+						class="btn btn-light">Quay lại</a>
 				</div>
 			</div>
 		</div>
@@ -92,6 +92,7 @@
 		<!-- Page Content -->
 		<div class="card card-form">
 			<div class="row no-gutters">
+				<input type="hidden" name="projectId" value="${projectId }">
 				<%
 					if (request.getAttribute("message") != null) {
 				%>
@@ -99,82 +100,86 @@
 				<%
 					}
 				%>
-				<div class="col-lg-12 card-form__body border-left">
-					<div class="search-form search-form--light m-3">
-						<input type="text" class="form-control search"
-							placeholder="Search">
-						<button class="btn" type="button">
-							<i class="material-icons">search</i>
-						</button>
-					</div>
-					<div class="table-responsive border-bottom" data-toggle="lists"
-						data-lists-values='["js-lists-values-employee-name"]'>
-						<table class="table mb-0 thead-border-top-0">
-							<thead class="bg-white">
-								<tr>
-									<th style="width: 18px;">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox"
-												class="custom-control-input js-toggle-check-all"
-												data-target="#staff" id="customCheckAll"> <label
-												class="custom-control-label" for="customCheckAll"><span
-												class="text-hide">Toggle all</span></label>
-										</div>
-									</th>
-									<th><a href="javascript:void(0)" class="sort"
-										data-sort="js-lists-values-employee-title">Nhân viên</a></th>
-									<th><a href="javascript:void(0)" class="sort"
-										data-sort="js-lists-values-employee-title">Username</a></th>
-									<th><a href="javascript:void(0)" class="sort"
-										data-sort="js-lists-values-employee-title">Email</a></th>
-									<th>Ngày tham gia</th>
-									<th>Chức vụ</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody class="list" id="staff">
-								<c:forEach items="${userprojects}" var="user">
-									<tr class="selected">
-										<td>
+				<form method="post"
+					action="<%=request.getContextPath() + Path.PROJECT_USER%>">
+					<div class="col-lg-12 card-form__body border-left">
+						<div class="search-form search-form--light m-3">
+							<input type="text" class="form-control search"
+								placeholder="Search">
+							<button class="btn" type="button">
+								<i class="material-icons">search</i>
+							</button>
+						</div>
+						<div class="table-responsive border-bottom" data-toggle="lists"
+							data-lists-values='["js-lists-values-employee-name"]'>
+							<table class="table mb-0 thead-border-top-0">
+								<thead class="bg-white">
+									<tr>
+										<th style="width: 18px;">
 											<div class="custom-control custom-checkbox">
 												<input type="checkbox"
-													<c:if test="${user.projectid != 0}">checked</c:if>
-													class="custom-control-input js-check-selected-row"
-													id="${user.userid }"> <label
-													class="custom-control-label" for="${user.userid}"><span
-													class="text-hide">Check</span></label>
+													class="custom-control-input js-toggle-check-all"
+													data-target="#staff" id="customCheckAll"> <label
+													class="custom-control-label" for="customCheckAll"><span
+													class="text-hide">Toggle all</span></label>
 											</div>
-										</td>
-										<td>
-											<div class="media align-items-center">
-												<div class="avatar avatar-xs mr-2">
-													<img src="<c:url value="${user.avatar}" />"
-														class="avatar-img rounded-circle">
-												</div>
-												<div class="media-body">
-
-													<span class="js-lists-values-employee-name">${user.userfullname }</span>
-
-												</div>
-											</div>
-
-										</td>
-										<td>${user.username }</td>
-										<td>${user.useremail }</td>
-										<td><input id="flatpickrSample01" type="text"
-											class="form-control" placeholder="Ngày tham gia"
-											data-toggle="flatpickr" name="joindate"
-											value="${user.joinDate }"></td>
-										<td><input type="text" name="role" value="${user.role}"
-											class="form-control"></td>
+										</th>
+										<th><a href="javascript:void(0)" class="sort"
+											data-sort="js-lists-values-employee-title">Nhân viên</a></th>
+										<th><a href="javascript:void(0)" class="sort"
+											data-sort="js-lists-values-employee-title">Username</a></th>
+										<th><a href="javascript:void(0)" class="sort"
+											data-sort="js-lists-values-employee-title">Email</a></th>
+										<th>Ngày tham gia</th>
+										<th>Chức vụ</th>
+										<th></th>
 									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+								</thead>
+								<tbody class="list" id="staff">
+									<c:forEach items="${userprojects}" var="user">
+										<tr class="selected">
+											<td>
+												<div class="custom-control custom-checkbox">
+													<input type="checkbox"
+														<c:if test="${user.projectid != 0}">checked</c:if>
+														class="custom-control-input js-check-selected-row"
+														id="${user.userid }"> <label
+														class="custom-control-label" for="${user.userid}"><span
+														class="text-hide">Check</span></label>
+												</div>
+											</td>
+											<td>
+												<div class="media align-items-center">
+													<div class="avatar avatar-xs mr-2">
+														<img src="<c:url value="${user.avatar}" />"
+															class="avatar-img rounded-circle">
+													</div>
+													<div class="media-body">
+
+														<span class="js-lists-values-employee-name">${user.userfullname }</span>
+
+													</div>
+												</div>
+
+											</td>
+											<td>${user.username }</td>
+											<td>${user.useremail }</td>
+											<td><input id="flatpickrSample01" type="text"
+												class="form-control" placeholder="Ngày tham gia"
+												data-toggle="flatpickr" name="joindate"
+												value="${user.joinDate }"></td>
+											<td><input type="text" name="role" value="${user.role}"
+												class="form-control"></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+
+						</div>
+							<button type="submit" class="btn btn-dark">Lưu</button>
 					</div>
 
-
-				</div>
+				</form>
 			</div>
 		</div>
 	</div>

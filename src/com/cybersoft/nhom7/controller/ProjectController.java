@@ -66,6 +66,7 @@ public class ProjectController extends HttpServlet {
 			id = Integer.parseInt(req.getParameter("id"));
 			List<UserProjectDto> listuser = userprojectservice.getAllUserProjectByProjectId(id);
 			req.setAttribute("userprojects", listuser);
+			req.setAttribute("projectId", id);
 			req.getRequestDispatcher(Url.URL_PROJECT_USER).forward(req, resp);
 			break;
 		}
