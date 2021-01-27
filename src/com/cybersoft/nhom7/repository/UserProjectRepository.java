@@ -7,16 +7,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cybersoft.nhom7.dto.ProjectDto;
 import com.cybersoft.nhom7.dto.UserProjectDto;
 import com.cybersoft.nhom7.jdbc.MySqlConnection;
+import com.cybersoft.nhom7.model.UserProject;
 
 public class UserProjectRepository {
 
 	public List<UserProjectDto> getUserProjectByProjectId(int id)
 	{
 		Connection connection = MySqlConnection.getConnection();
-		String query = "select * from USER a left join (select * from USER_PROJECT where projectId = ?) as b on a.id = b.userId order by b.projectId desc";
+		String query = "select * from USER a "
+				+ "left join (select * from USER_PROJECT where projectId = ?) as b on a.id = b.userId	"
+				+ "join ROLE c on a.roleId = c.id	"
+				+ "where c.name = 'ROLE_MEMBER'"
+				+ " order by b.projectId desc";
 		List<UserProjectDto> projects = new ArrayList<UserProjectDto>();
 		try {
 			PreparedStatement statement = connection.prepareStatement(query);
@@ -39,5 +43,50 @@ public class UserProjectRepository {
 			e.printStackTrace();
 		}
 		return projects;
+	}
+	
+	public int save(List<UserProject> dtos)
+	{
+		Connection connection = MySqlConnection.getConnection();
+		try {
+			connection.setAutoCommit(false);
+			if(deleteBeforeUpdate(dtos.get(0).getProjectid(),connection) < 0)
+				return -1;
+			for (UserProject userProjectDto : dtos) {
+				String query = "insert into USER_PROJECT values (?,?,?,?)";
+				PreparedStatement statement = connection.prepareStatement(query);
+				statement.setInt(1, userProjectDto.getProjectid());
+				statement.setInt(2, userProjectDto.getUserid());
+				statement.setDate(3, userProjectDto.getJoinDate());
+				statement.setString(4, userProjectDto.getRole());
+				statement.executeUpdate();
+			}
+			connection.commit();
+			connection.setAutoCommit(true);
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public int deleteBeforeUpdate(int id, Connection connection)
+	{
+		String query = "delete from USER_PROJECT where projectId = ?";
+		System.out.println(query);
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setInt(1, id);
+			return statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public int delete(int id)
+	{
+		Connection connection = MySqlConnection.getConnection();
+		return deleteBeforeUpdate(id, connection);
 	}
 }

@@ -14,7 +14,6 @@ public class UserProjectDto {
 	public UserProjectDto() {
 	}
 	public UserProjectDto(int projectid, int userid, Date joinDate, String role) {
-		super();
 		this.projectid = projectid;
 		this.userid = userid;
 		this.joinDate = joinDate;

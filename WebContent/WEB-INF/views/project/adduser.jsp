@@ -92,7 +92,6 @@
 		<!-- Page Content -->
 		<div class="card card-form">
 			<div class="row no-gutters">
-				<input type="hidden" name="projectId" value="${projectId }">
 				<%
 					if (request.getAttribute("message") != null) {
 				%>
@@ -102,6 +101,7 @@
 				%>
 				<form method="post"
 					action="<%=request.getContextPath() + Path.PROJECT_USER%>">
+					<input type="hidden" name="projectId" value="${projectId}">
 					<div class="col-lg-12 card-form__body border-left">
 						<div class="search-form search-form--light m-3">
 							<input type="text" class="form-control search"
@@ -140,10 +140,10 @@
 										<tr class="selected">
 											<td>
 												<div class="custom-control custom-checkbox">
-													<input type="checkbox"
+													<input type="checkbox" name="check"
 														<c:if test="${user.projectid != 0}">checked</c:if>
 														class="custom-control-input js-check-selected-row"
-														id="${user.userid }"> <label
+														value="${user.userid}" id="${user.userid }"> <label
 														class="custom-control-label" for="${user.userid}"><span
 														class="text-hide">Check</span></label>
 												</div>
@@ -151,32 +151,36 @@
 											<td>
 												<div class="media align-items-center">
 													<div class="avatar avatar-xs mr-2">
+														<input name="avatar" value="${user.avatar}" type="hidden">
 														<img src="<c:url value="${user.avatar}" />"
 															class="avatar-img rounded-circle">
 													</div>
 													<div class="media-body">
-
-														<span class="js-lists-values-employee-name">${user.userfullname }</span>
+														<input name="fullname" value="${user.userfullname}"
+															type="hidden"> <span
+															class="js-lists-values-employee-name">${user.userfullname }</span>
 
 													</div>
 												</div>
 
 											</td>
-											<td>${user.username }</td>
-											<td>${user.useremail }</td>
+											<td><input name="username" value="${user.username}"
+												type="hidden"> ${user.username }</td>
+											<td><input name="useremail" value="${user.useremail}"
+												type="hidden"> ${user.useremail }</td>
 											<td><input id="flatpickrSample01" type="text"
 												class="form-control" placeholder="Ngày tham gia"
-												data-toggle="flatpickr" name="joindate"
+												data-toggle="flatpickr" name="joindate${user.userid}"
 												value="${user.joinDate }"></td>
-											<td><input type="text" name="role" value="${user.role}"
-												class="form-control"></td>
+											<td><input type="text" name="role${user.userid}"
+												value="${user.role}" class="form-control"></td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
 
 						</div>
-							<button type="submit" class="btn btn-dark">Lưu</button>
+						<button type="submit" class="btn btn-dark">Lưu</button>
 					</div>
 
 				</form>
