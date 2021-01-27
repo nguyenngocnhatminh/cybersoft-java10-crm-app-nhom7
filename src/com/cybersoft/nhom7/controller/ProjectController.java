@@ -15,18 +15,22 @@ import javax.servlet.http.HttpSession;
 
 import com.cybersoft.nhom7.dto.ProjectDto;
 import com.cybersoft.nhom7.dto.UserDto;
+import com.cybersoft.nhom7.dto.UserProjectDto;
 import com.cybersoft.nhom7.service.ProjectService;
+import com.cybersoft.nhom7.service.UserProjectService;
 import com.cybersoft.nhom7.util.Path;
 import com.cybersoft.nhom7.util.Url;
 
 @WebServlet(name = "projectController", urlPatterns = { Path.PROJECT_INDEX, Path.PROJECT_ADD, Path.PROJECT_EDIT,
-		Path.PROJECT_DELETE })
+		Path.PROJECT_DELETE, Path.PROJECT_USER })
 public class ProjectController extends HttpServlet {
 
 	ProjectService service;
-
+	UserProjectService	userprojectservice;
+	
 	public ProjectController() {
 		service = new ProjectService();
+		userprojectservice = new UserProjectService();
 	}
 
 	@Override
@@ -34,10 +38,12 @@ public class ProjectController extends HttpServlet {
 		// TODO Auto-generated method stub
 		String action = req.getServletPath();
 		int id;
+		HttpSession session = req.getSession();
 		
 		switch (action) {
 		case Path.PROJECT_INDEX:
-			List<ProjectDto> dtos = service.getAllProjects();
+			UserDto user = (UserDto)session.getAttribute("USER_LOGIN"); 
+			List<ProjectDto> dtos = service.getAllProjectsByUser(user.getId());
 			req.setAttribute("projects", dtos);
 			req.getRequestDispatcher(Url.URL_PROJECT_INDEX).forward(req, resp);
 			break;
@@ -55,6 +61,12 @@ public class ProjectController extends HttpServlet {
 			if(service.delete(id) <1);
 				req.setAttribute("message", "Xóa không thành công");
 			resp.sendRedirect(req.getContextPath() + Path.PROJECT_INDEX);
+			break;
+		case Path.PROJECT_USER:
+			id = Integer.parseInt(req.getParameter("id"));
+			List<UserProjectDto> listuser = userprojectservice.getAllUserProjectByProjectId(id);
+			req.setAttribute("userprojects", listuser);
+			req.getRequestDispatcher(Url.URL_PROJECT_USER).forward(req, resp);
 			break;
 		}
 	}

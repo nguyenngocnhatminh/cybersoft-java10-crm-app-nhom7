@@ -68,7 +68,7 @@
 									<th>Ngày bắt đầu</th>
 									<th>Ngày kết thúc</th>
 									<th>Người tạo</th>
-									<th></th>
+									<th>Quản lý thành viên</th>
 									<th></th>
 									<th></th>
 								</tr>
@@ -114,9 +114,9 @@
 												</div>
 											</div>
 										</td>
-										<td><a
-											href="<%=request.getContextPath()+Path.PROJECT_DELETE%>?id=${project.id}"
-											class="text-muted"><i class="fas fa-user-plus"></i></a></td>
+										<td><a class="media align-items-center"
+											href="<%=request.getContextPath()+Path.PROJECT_USER%>?id=${project.id}"
+											class="text-muted"><i class="fas fa-user"></i></a></td>
 										<td><span class="badge badge-warning">${role.description}</span></td>
 										<td><a
 											href="<%=request.getContextPath()+Path.PROJECT_EDIT%>?id=${project.id}"

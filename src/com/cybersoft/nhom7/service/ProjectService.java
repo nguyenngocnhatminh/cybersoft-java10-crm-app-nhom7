@@ -15,6 +15,11 @@ public class ProjectService {
 		return repository.getAllProject();
 	}
 	
+	public List<ProjectDto> getAllProjectsByUser(int id)
+	{
+		return repository.getAllProjectByUser(id);
+	}
+	
 	public ProjectDto getProjectByID(int id)
 	{
 		return repository.getProjectById(id);

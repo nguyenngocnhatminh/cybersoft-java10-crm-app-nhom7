@@ -25,5 +25,6 @@ public class Path {
 	public static final String PROJECT_ADD		=	"/project/add";
 	public static final String PROJECT_EDIT		=	"/project/edit";
 	public static final String PROJECT_DELETE	=	"/project/delete";
+	public static final String PROJECT_USER	=	"/project/user";
 	
 }
