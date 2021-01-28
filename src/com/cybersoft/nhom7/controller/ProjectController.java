@@ -65,7 +65,7 @@ public class ProjectController extends HttpServlet {
 			break;
 		case Path.PROJECT_USER:
 			id = Integer.parseInt(req.getParameter("id"));
-			List<UserProjectDto> listuser = userprojectservice.getAllUserProjectByProjectId(id);
+			List<UserProjectDto> listuser = userprojectservice.getAllUserByProjectId(id);
 			req.setAttribute("userprojects", listuser);
 			req.setAttribute("projectId", id);
 			req.getRequestDispatcher(Url.URL_PROJECT_USER).forward(req, resp);
@@ -122,7 +122,7 @@ public class ProjectController extends HttpServlet {
 				if(userprojectservice.delete(projectid) < 1)
 				{
 					req.setAttribute("message", "Lưu thành viên không thành công");
-					List<UserProjectDto> listuser = userprojectservice.getAllUserProjectByProjectId(projectid);
+					List<UserProjectDto> listuser = userprojectservice.getAllUserByProjectId(projectid);
 					req.setAttribute("userprojects", listuser);
 					req.setAttribute("projectId", projectid);
 					req.getRequestDispatcher(Url.URL_PROJECT_USER).forward(req, resp);
@@ -142,7 +142,7 @@ public class ProjectController extends HttpServlet {
 			if(userprojectservice.save(dtos) < 1 )
 			{
 				req.setAttribute("message", "Lưu thành viên không thành công");
-				List<UserProjectDto> listuser = userprojectservice.getAllUserProjectByProjectId(projectid);
+				List<UserProjectDto> listuser = userprojectservice.getAllUserByProjectId(projectid);
 				req.setAttribute("userprojects", listuser);
 				req.setAttribute("projectId", projectid);
 				req.getRequestDispatcher(Url.URL_PROJECT_USER).forward(req, resp);

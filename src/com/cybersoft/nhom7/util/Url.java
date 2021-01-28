@@ -24,4 +24,9 @@ public class Url {
 	public static final String URL_PROJECT_ADD		=	"/WEB-INF/views/project/add.jsp";
 	public static final String URL_PROJECT_EDIT		=	"/WEB-INF/views/project/edit.jsp";
 	public static final String URL_PROJECT_USER		=	"/WEB-INF/views/project/adduser.jsp";
+	
+	//task
+	public static final String URL_TASK_INDEX		=	"/WEB-INF/views/task/index.jsp";
+	public static final String URL_TASK_ADD			=	"/WEB-INF/views/task/add.jsp";
+	public static final String URL_TASK_EDIT		=	"/WEB-INF/views/task/edit.jsp";
 }

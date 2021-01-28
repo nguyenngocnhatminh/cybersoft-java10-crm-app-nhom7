@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Tạo mới dự án</title>
+<title>Tạo mới task</title>
 <link rel="shortcut icon"
 	href="<c:url value ="/assets/images/favicon.ico"/>" />
 
@@ -69,6 +69,13 @@
 	href="<c:url value ="/assets/vendor/daterangepicker.css"/>"
 	rel="stylesheet">
 
+<!-- Select2 -->
+<link type="text/css" href="<c:url value ="/assets/css/vendor-select2.css"/>"
+	rel="stylesheet">
+<link type="text/css" href="<c:url value = "/assets/css/vendor-select2.rtl.css" />"
+	rel="stylesheet">
+<link type="text/css" href="<c:url value = "/assets/vendor/select2/select2.min.css" />"
+	rel="stylesheet">
 </head>
 <body>
 	<div class="container page__heading-container">
@@ -79,14 +86,16 @@
 						<ol class="breadcrumb mb-0">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
 							<li class="breadcrumb-item active" aria-current="page">Project</li>
-							<li class="breadcrumb-item active" aria-current="page">Project
+							<li class="breadcrumb-item active" aria-current="page">Task</li>
+
+							<li class="breadcrumb-item active" aria-current="page">Task
 								add</li>
 						</ol>
 					</nav>
-					<h1 class="m-0">Thêm mới dự án</h1>
+					<h1 class="m-0">Thêm mới task</h1>
 				</div>
 				<div class="ml-auto">
-					<a href="<%=request.getContextPath() + Path.PROJECT_INDEX%>"
+					<a href="<%=request.getContextPath() + Path.TASK_INDEX%>"
 						class="btn btn-light"> Quay lại</a>
 				</div>
 			</div>
@@ -106,10 +115,11 @@
 						<%
 							}
 						%>
+						<input type = "hidden" name = "projectid" value ="${projectid}">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="fname">Tên dự án</label> <input name="name"
+									<label for="fname">Tên task</label> <input name="name"
 										type="text" class="form-control" placeholder="Project name">
 								</div>
 							</div>
@@ -118,9 +128,32 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="fname">Mô tả</label>
-									<input name="description"
+									<label for="fname">Mô tả</label> <input name="description"
 										type="text" class="form-control" placeholder="Description">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="fname">Tên dự án</label> <input name="projectname"
+										type="text" class="form-control" placeholder="Project name"
+										value="${projectname}" readonly>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="fname">Thành viên đảm nhiệm</label> <select
+										name="userid" data-minimum-results-for-search="-1"
+										class="form-control">
+										<c:forEach items="${userprojects}" var="userproject">
+											<option value="${userproject.userid}"
+												data-avatar-src="<c:url value ="${userproject.avatar}"/>">
+												${userproject.username} - ${userproject.userfullname}</option>
+										</c:forEach>
+									</select>
 								</div>
 							</div>
 						</div>
@@ -129,18 +162,19 @@
 								<div class="form-group">
 									<label for="fname">Ngày bắt đầu</label> <input
 										id="flatpickrSample01" type="text" class="form-control"
-										placeholder="Flatpickr example" data-toggle="flatpickr"
-										name = "startdate" value="">
+										placeholder="Start date" data-toggle="flatpickr"
+										name="startdate" value="">
 
 
 								</div>
+
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="fname">Ngày kết thúc</label> <input
 										id="flatpickrSample01" type="text" class="form-control"
-										placeholder="Flatpickr example" data-toggle="flatpickr"
-										name ="enddate" value="">
+										placeholder="End date" data-toggle="flatpickr" name="enddate"
+										value="">
 
 								</div>
 							</div>
@@ -209,5 +243,9 @@
 	<!-- Quill -->
 	<script src="<c:url value ="/assets/vendor/quill.min.js"/>"></script>
 	<script src="<c:url value ="/assets/js/quill.js"/>"></script>
+	
+	    <!-- Select2 -->
+    <script src="<c:url value = "/assets/vendor/select2/select2.min.js"/>"></script>
+    <script src="<c:url value = "assets/js/select2.js"/>"></script>
 </body>
 </html>

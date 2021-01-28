@@ -13,7 +13,7 @@ import com.cybersoft.nhom7.model.UserProject;
 
 public class UserProjectRepository {
 
-	public List<UserProjectDto> getUserProjectByProjectId(int id)
+	public List<UserProjectDto> getAllUserByProjectId(int id)
 	{
 		Connection connection = MySqlConnection.getConnection();
 		String query = "select * from USER a "
@@ -36,6 +36,36 @@ public class UserProjectRepository {
 				project.setUsername(rs.getString("username"));
 				project.setUseremail(rs.getString("email"));
 				project.setUserfullname(rs.getString("fullname"));
+				project.setAvatar(rs.getString("avatar"));
+				projects.add(project);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return projects;
+	}
+	
+	public List<UserProjectDto> getUserProjectByProjectByProjectId(int id)
+	{
+		Connection connection = MySqlConnection.getConnection();
+		String query ="select a.projectId,a.userId,b.avatar , b.username,b.fullname, c.name as projectname "
+				+ "from USER_PROJECT a "
+				+ "join USER b on a.userId = b.id "
+				+ "join PROJECT c on a.projectId = c.id "
+				+ "where a.projectId = ?";
+		List<UserProjectDto> projects = new ArrayList<UserProjectDto>();
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setInt(1, id);
+			ResultSet rs = statement.executeQuery();
+			while (rs.next())
+			{
+				UserProjectDto project = new UserProjectDto();
+				project.setProjectid(rs.getInt("projectId"));
+				project.setUserid(rs.getInt("userId"));
+				project.setUsername(rs.getString("username"));
+				project.setUserfullname(rs.getString("fullname"));
+				project.setProjectname(rs.getString("projectname"));
 				project.setAvatar(rs.getString("avatar"));
 				projects.add(project);
 			}

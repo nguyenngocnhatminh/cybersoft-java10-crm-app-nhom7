@@ -17,9 +17,14 @@ public class UserProjectService {
 		repository = new UserProjectRepository();
 	}
 	
+	public List<UserProjectDto> getAllUserByProjectId(int id)
+	{
+		return repository.getAllUserByProjectId(id);
+	}
+	
 	public List<UserProjectDto> getAllUserProjectByProjectId(int id)
 	{
-		return repository.getUserProjectByProjectId(id);
+		return repository.getUserProjectByProjectByProjectId(id);
 	}
 	
 	public List<UserProjectDto> ParseToUserProjectDto(String[] userid,int projectId,String[] joindates,String[] roles)
