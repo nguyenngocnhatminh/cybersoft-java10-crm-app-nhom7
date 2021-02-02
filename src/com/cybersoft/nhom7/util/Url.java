@@ -5,6 +5,10 @@ public class Url {
 	//home
 	public static final String URL_HOME				=	"/WEB-INF/views/dashboard.jsp";
 	
+	//error
+	public static final String URL_404				=	"/WEB-INF/views/error/404";
+	public static final String URL_403				=	"/WEB-INF/views/error/403";
+	
 	//auth
 	public static final String URL_LOGIN			=	"/WEB-INF/views/auth/login.jsp";
 	public static final String URL_SIGNUP			=	"/WEB-INF/views/auth/signup.jsp";

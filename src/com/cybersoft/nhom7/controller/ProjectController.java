@@ -43,7 +43,11 @@ public class ProjectController extends HttpServlet {
 		switch (action) {
 		case Path.PROJECT_INDEX:
 			UserDto user = (UserDto) session.getAttribute("USER_LOGIN");
-			List<ProjectDto> dtos = service.getAllProjectsByUser(user.getId());
+			List<ProjectDto> dtos;
+			if(user.getRolename().equals("ROLE_ADMIN"))
+				dtos = service.getAllProjects();
+			else
+				dtos = service.getAllProjectsByUser(user.getId());
 			req.setAttribute("projects", dtos);
 			req.getRequestDispatcher(Url.URL_PROJECT_INDEX).forward(req, resp);
 			break;

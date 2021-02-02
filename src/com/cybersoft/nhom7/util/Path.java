@@ -6,6 +6,9 @@ public class Path {
 	public static final String ASSETS			=	"/assets";
 	//home
 	public static final String HOME				=	"/home";
+	//error
+	public static final String ERROR_404		=	"/404";
+	public static final String ERROR_403		=	"/403";
 	//auth
 	public static final String LOGIN			=	"/login";
 	public static final String SIGNUP			=	"/signup";

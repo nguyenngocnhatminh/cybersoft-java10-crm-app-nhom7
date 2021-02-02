@@ -38,6 +38,25 @@ public class AuthFilter implements Filter {
 			resp.sendRedirect(req.getContextPath()+ Path.LOGIN);
 			return;
 		}
+		//role
+		if(path.startsWith(Path.ROLE_INDEX) && !dto.getRolename().equals("ROLE_ADMIN"))
+		{
+			resp.sendRedirect(req.getContextPath() + Path.ERROR_403);
+			return;
+		}
+		//user
+		if(path.startsWith(Path.USER_INDEX) && (!dto.getRolename().equals("ROLE_ADMIN") && !dto.getRolename().equals("ROLE_LEADER")) )
+		{
+			resp.sendRedirect(req.getContextPath() + Path.ERROR_403);
+			return;
+		}
+		//user add/edit/delete
+		if((path.startsWith(Path.USER_INDEX) && path.equals(Path.USER_INDEX)) && !dto.getRolename().equals("ROLE_ADMIN"))
+		{
+			resp.sendRedirect(req.getContextPath() + Path.ERROR_403);
+			return;
+		}
+		//project
 		
 		chain.doFilter(request, response);
 	}
