@@ -75,99 +75,70 @@
 				</div>
 				<div class="ml-auto">
 
-					<a href="<%=request.getContextPath() + Path.TASK_ADD%>?projectid=${projectid}"
+					<a
+						href="<%=request.getContextPath() + Path.TASK_ADD%>?projectid=${projectid}"
 						class="btn btn-light"> Tạo task</a>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="trello-container">
-		<div class="trello-board page__container">
-			<div class="trello-board__tasks" data-toggle="dragula"
-				data-dragula-containers='["#trello-tasks-1", "#trello-tasks-2", "#trello-tasks-3", "#trello-tasks-4"]'>
-				<div class="card bg-light border">
-					<div class="card-header card-header-sm bg-white border-primary">
-						<h4 class="card-header__title">Todo</h4>
-					</div>
-					<div class="card-body p-2">
-						<div class="trello-board__tasks-list card-list"
-							id="trello-tasks-1">
-							<div class="trello-board__tasks-item card shadow-none border">
-								<div class="p-3">
-									<p class="m-0 d-flex align-items-center">
-										<strong>Add UI Buttons Page</strong> <span
-											class="badge badge-light-gray ml-auto">OPEN</span>
-									</p>
-
-									<p class="d-flex align-items-center mb-2 small">
-										<i class="material-icons icon-14pt mr-1 text-muted">folder_open</i>
-										<span class="text-muted mr-2">Stack</span> <i
-											class="material-icons icon-14pt mr-1 text-muted">comment</i>
-										<span class="text-muted"><strong>28</strong> comments</span>
-									</p>
-									<div class="media align-items-center">
-										<div class="media-left mr-2">
-
-											<div class="avatar avatar-xxs" data-toggle="tooltip"
-												data-placement="top" title="Janell D.">
-												<img
-													src="assets/images/256_rsz_1andy-lee-642320-unsplash.jpg"
-													alt="Avatar" class="avatar-img rounded-circle">
-											</div>
-
-										</div>
-										<div class="media-body small media-middle"></div>
-									</div>
-								</div>
-							</div>
+		<div class="trello-board page__container" data-toggle="dragula"
+			data-dragula-containers='${statustoggledata }'>
+			<c:forEach items="${listStatus}" var="status">
+				<div class="trello-board__tasks">
+					<div class="card bg-light border">
+						<div class="card-header card-header-sm bg-white border-primary">
+							<h4 class="card-header__title">${status.description }</h4>
 						</div>
-						<a href="#" class="btn btn-link text-muted btn-block mt-2">+
-							Add Card</a>
-					</div>
-				</div>
-			</div>
-			<div class="trello-board__tasks">
-				<div class="card bg-light border">
-					<div class="card-header card-header-sm bg-white border-warning">
-						<h4 class="card-header__title">In Progress (2)</h4>
-					</div>
-					<div class="card-body p-2">
-						<div class="trello-board__tasks-list card-list"
-							id="trello-tasks-2"></div>
-						<a href="#" class="btn btn-link text-muted btn-block mt-2">+
-							Add Card</a>
-					</div>
-				</div>
-			</div>
-			<div class="trello-board__tasks">
-				<div class="card bg-light border">
-					<div class="card-header card-header-sm bg-white border-purple">
-						<h4 class="card-header__title">Review (1)</h4>
-					</div>
-					<div class="card-body p-2">
-						<div class="trello-board__tasks-list card-list"
-							id="trello-tasks-3"></div>
-						<a href="#" class="btn btn-link text-muted btn-block mt-2">+
-							Add Card</a>
-					</div>
-				</div>
-			</div>
-			<div class="trello-board__tasks">
-				<div class="card bg-light border">
-					<div class="card-header card-header-sm bg-white border-success">
-						<h4 class="card-header__title">Done (1)</h4>
-					</div>
-					<div class="card-body p-2">
-						<div class="trello-board__tasks-list card-list"
-							id="trello-tasks-4">
+						<input type="hidden" value="${status.id }">
+						<div class="card-body p-2">
+							<div class="trello-board__tasks-list card-list"
+								id="trello-tasks-${status.id }">
+								<c:forEach items="${tasks}" var="task">
+									<c:if test="${task.statusid == status.id}">
+										<div class="trello-board__tasks-item card shadow-none border">
+											<div class="p-3">
+												<p class="m-0 d-flex align-items-center">
+													<a href="<%=request.getContextPath()+Path.TASK_EDIT%>?id=${task.id}">${task.name}</a> <span
+														class="badge badge-light-gray ml-auto">${task.categorydes }</span>
+												</p>
+
+												<p class="d-flex align-items-center mb-2 small">
+													<i class="material-icons icon-14pt mr-1 text-muted">folder_open</i>
+													<span class="text-muted mr-2">Stack</span> <i
+														class="material-icons icon-14pt mr-1 text-muted">comment</i>
+													<span class="text-muted"><strong>28</strong>
+														comments</span>
+												</p>
+												<div class="media align-items-center">
+													<div class="media-left mr-2">
+
+														<div class="avatar avatar-xxs" data-toggle="tooltip"
+															data-placement="top" title="${task.username }">
+															<img
+																src="<c:url value = "${task.useravatar }"/>"
+																alt="Avatar" class="avatar-img rounded-circle">
+														</div>
+
+													</div>
+													<div class="media-body small media-middle"></div>
+												</div>
+											</div>
+										</div>
+									</c:if>
+								</c:forEach>
+							</div>
+
 							<a href="#" class="btn btn-link text-muted btn-block mt-2">+
 								Add Card</a>
 						</div>
 					</div>
 				</div>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
+	
 	<!-- App Settings FAB -->
 	<div id="app-settings" hidden>
 		<app-settings layout-active="fixed"

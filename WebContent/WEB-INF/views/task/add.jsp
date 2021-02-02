@@ -70,11 +70,14 @@
 	rel="stylesheet">
 
 <!-- Select2 -->
-<link type="text/css" href="<c:url value ="/assets/css/vendor-select2.css"/>"
+<link type="text/css"
+	href="<c:url value ="/assets/css/vendor-select2.css"/>"
 	rel="stylesheet">
-<link type="text/css" href="<c:url value = "/assets/css/vendor-select2.rtl.css" />"
+<link type="text/css"
+	href="<c:url value = "/assets/css/vendor-select2.rtl.css" />"
 	rel="stylesheet">
-<link type="text/css" href="<c:url value = "/assets/vendor/select2/select2.min.css" />"
+<link type="text/css"
+	href="<c:url value = "/assets/vendor/select2/select2.min.css" />"
 	rel="stylesheet">
 </head>
 <body>
@@ -95,7 +98,7 @@
 					<h1 class="m-0">Thêm mới task</h1>
 				</div>
 				<div class="ml-auto">
-					<a href="<%=request.getContextPath() + Path.TASK_INDEX%>"
+					<a href="<%=request.getContextPath() + Path.TASK_INDEX%>?projectid=${projectid}"
 						class="btn btn-light"> Quay lại</a>
 				</div>
 			</div>
@@ -104,7 +107,7 @@
 	<div class="container page__container">
 		<!-- Page Content -->
 		<div class="card card-form">
-			<form action="<%=request.getContextPath() + Path.PROJECT_ADD%>"
+			<form action="<%=request.getContextPath()  + Path.TASK_ADD%>"
 				method="post">
 				<div class="row no-gutters">
 					<div class="col-lg-12 card-form__body card-body">
@@ -115,7 +118,7 @@
 						<%
 							}
 						%>
-						<input type = "hidden" name = "projectid" value ="${projectid}">
+						<input type="hidden" name="projectid" value="${projectid}">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -152,6 +155,34 @@
 											<option value="${userproject.userid}"
 												data-avatar-src="<c:url value ="${userproject.avatar}"/>">
 												${userproject.username} - ${userproject.userfullname}</option>
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="fname">Nhóm công việc</label> <select
+										name="categoryid" data-minimum-results-for-search="-1"
+										class="form-control">
+										<c:forEach items="${categories}" var="category">
+											<option value="${category.id}">
+												${category.description}</option>
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="fname">Trạng thái</label> <select
+										name="statusid" data-minimum-results-for-search="-1"
+										class="form-control">
+										<c:forEach items="${liststatus}" var="status">
+											<option value="${status.id}">
+												${status.description}</option>
 										</c:forEach>
 									</select>
 								</div>
@@ -243,9 +274,9 @@
 	<!-- Quill -->
 	<script src="<c:url value ="/assets/vendor/quill.min.js"/>"></script>
 	<script src="<c:url value ="/assets/js/quill.js"/>"></script>
-	
-	    <!-- Select2 -->
-    <script src="<c:url value = "/assets/vendor/select2/select2.min.js"/>"></script>
-    <script src="<c:url value = "assets/js/select2.js"/>"></script>
+
+	<!-- Select2 -->
+	<script src="<c:url value = "/assets/vendor/select2/select2.min.js"/>"></script>
+	<script src="<c:url value = "assets/js/select2.js"/>"></script>
 </body>
 </html>
