@@ -31,5 +31,6 @@ public class Path {
 	public static final String TASK_ADD			=	"/task/add";
 	public static final String TASK_EDIT		=	"/task/edit";
 	public static final String TASK_DELETE		=	"/task/delete";
+	public static final String TASK_USER		=	"/task/user";
 	
 }

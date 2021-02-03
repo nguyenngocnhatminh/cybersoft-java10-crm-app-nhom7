@@ -25,6 +25,11 @@ public class TaskService {
 		return repository.getAllTaskByTaskId(id);
 	}
 	
+	public List<TaskDto> getTaskByUserId(int userid)
+	{
+		return repository.getAllTaskByUserId(userid);
+	}
+	
 	public int save(TaskDto dto)
 	{
 		Task task = new Task(dto);

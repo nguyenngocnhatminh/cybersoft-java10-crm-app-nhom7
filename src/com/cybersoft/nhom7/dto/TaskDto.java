@@ -18,6 +18,8 @@ public class TaskDto {
 	private String categorydes;
 	private String username;
 	private String useravatar;
+	private String statusdes;
+	private String projectname;
 	
 	public TaskDto() {
 	}
@@ -151,6 +153,22 @@ public class TaskDto {
 
 	public void setUseravatar(String useravatar) {
 		this.useravatar = useravatar;
+	}
+
+	public String getStatusdes() {
+		return statusdes;
+	}
+
+	public void setStatusdes(String statusdes) {
+		this.statusdes = statusdes;
+	}
+
+	public String getProjectname() {
+		return projectname;
+	}
+
+	public void setProjectname(String projectname) {
+		this.projectname = projectname;
 	}
 
 }

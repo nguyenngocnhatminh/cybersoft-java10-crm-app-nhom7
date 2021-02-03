@@ -77,7 +77,7 @@ public class ProjectController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String action = req.getServletPath();
-		if (action == Path.PROJECT_ADD || action == Path.PROJECT_EDIT) {
+		if (action.equals(Path.PROJECT_ADD) || action.equals(Path.PROJECT_EDIT)) {
 			String name = req.getParameter("name");
 			String description = req.getParameter("description");
 			HttpSession session = req.getSession();
