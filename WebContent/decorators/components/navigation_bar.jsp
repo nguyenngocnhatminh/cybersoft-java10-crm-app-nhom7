@@ -21,7 +21,7 @@
 						href="<%=request.getContextPath() + Path.USER_INDEX%>">User</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="<%=request.getContextPath() + Path.PROJECT_INDEX%>">Project</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Task</a></li>
+					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath() + Path.TASK_USER%>">Task</a></li>
 				</ul>
 			</div>
 		</div>
