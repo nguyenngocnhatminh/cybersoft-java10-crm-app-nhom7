@@ -28,6 +28,11 @@ public class Path {
 	public static final String PROJECT_ADD		=	"/project/add";
 	public static final String PROJECT_EDIT		=	"/project/edit";
 	public static final String PROJECT_DELETE	=	"/project/delete";
-	public static final String PROJECT_USER	=	"/project/user";
+	public static final String PROJECT_USER		=	"/project/user";
+	//task
+	public static final String TASK_INDEX		=	"/task";
+	public static final String TASK_ADD			=	"/task/add";
+	public static final String TASK_EDIT		=	"/task/edit";
+	public static final String TASK_DELETE		=	"/task/delete";
 	
 }

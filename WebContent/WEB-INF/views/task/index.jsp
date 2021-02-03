@@ -7,7 +7,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Tạo mới dự án</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title>Quản lý task</title>
 <link rel="shortcut icon"
 	href="<c:url value ="/assets/images/favicon.ico"/>" />
 
@@ -47,28 +50,14 @@
 <link type="text/css"
 	href="<c:url value ="/assets/css/vendor-flatpickr-airbnb.css"/>"
 	rel="stylesheet" />
-<link type="text/css" href="/assets/css/vendor-flatpickr-airbnb.rtl.css"
-	rel="stylesheet" />
-
-<!-- Flatpickr -->
-<link type="text/css"
-	href="<c:url value ="/assets/css/vendor-flatpickr.css"/>"
-	rel="stylesheet">
-<link type="text/css"
-	href="<c:url value ="/assets/css/vendor-flatpickr.rtl.css"/>"
-	rel="stylesheet">
-<link type="text/css"
-	href="<c:url value ="/assets/css/vendor-flatpickr-airbnb.css"/>"
-	rel="stylesheet">
 <link type="text/css"
 	href="<c:url value ="/assets/css/vendor-flatpickr-airbnb.rtl.css"/>"
-	rel="stylesheet">
+	rel="stylesheet" />
 
-<!-- DateRangePicker -->
+<!-- Dragula -->
 <link type="text/css"
-	href="<c:url value ="/assets/vendor/daterangepicker.css"/>"
+	href="<c:url value ="/assets/vendor/dragula/dragula.min.css"/>"
 	rel="stylesheet">
-
 </head>
 <body>
 	<div class="container page__heading-container">
@@ -79,83 +68,77 @@
 						<ol class="breadcrumb mb-0">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
 							<li class="breadcrumb-item active" aria-current="page">Project</li>
-							<li class="breadcrumb-item active" aria-current="page">Project
-								add</li>
+							<li class="breadcrumb-item active" aria-current="page">Task</li>
 						</ol>
 					</nav>
-					<h1 class="m-0">Thêm mới dự án</h1>
+					<h1 class="m-0">Quản lý task</h1>
 				</div>
 				<div class="ml-auto">
-					<a href="<%=request.getContextPath() + Path.PROJECT_INDEX%>"
-						class="btn btn-light"> Quay lại</a>
+
+					<a
+						href="<%=request.getContextPath() + Path.TASK_ADD%>?projectid=${projectid}"
+						class="btn btn-light"> Tạo task</a>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="container page__container">
-		<!-- Page Content -->
-		<div class="card card-form">
-			<form action="<%=request.getContextPath() + Path.PROJECT_ADD%>"
-				method="post">
-				<div class="row no-gutters">
-					<div class="col-lg-12 card-form__body card-body">
-						<%
-							if (request.getAttribute("message") != null) {
-						%>
-						<h3 class="text-danger"><%=request.getAttribute("message")%></h3>
-						<%
-							}
-						%>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label for="fname">Tên dự án</label> <input name="name"
-										type="text" class="form-control" placeholder="Project name">
-								</div>
-							</div>
-
+	<div class="trello-container">
+		<div class="trello-board page__container" data-toggle="dragula"
+			data-dragula-containers='${statustoggledata }'>
+			<c:forEach items="${listStatus}" var="status">
+				<div class="trello-board__tasks">
+					<div class="card bg-light border">
+						<div class="card-header card-header-sm bg-white border-primary">
+							<h4 class="card-header__title">${status.description }</h4>
 						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label for="fname">Mô tả</label>
-									<input name="description"
-										type="text" class="form-control" placeholder="Description">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="fname">Ngày bắt đầu</label> <input
-										id="flatpickrSample01" type="text" class="form-control"
-										placeholder="Flatpickr example" data-toggle="flatpickr"
-										name = "startdate" value="">
+						<input type="hidden" value="${status.id }">
+						<div class="card-body p-2">
+							<div class="trello-board__tasks-list card-list"
+								id="trello-tasks-${status.id }">
+								<c:forEach items="${tasks}" var="task">
+									<c:if test="${task.statusid == status.id}">
+										<div class="trello-board__tasks-item card shadow-none border">
+											<div class="p-3">
+												<p class="m-0 d-flex align-items-center">
+													<a href="<%=request.getContextPath()+Path.TASK_EDIT%>?id=${task.id}">${task.name}</a> <span
+														class="badge badge-light-gray ml-auto">${task.categorydes }</span>
+												</p>
 
+												<p class="d-flex align-items-center mb-2 small">
+													<i class="material-icons icon-14pt mr-1 text-muted">folder_open</i>
+													<span class="text-muted mr-2">Stack</span> <i
+														class="material-icons icon-14pt mr-1 text-muted">comment</i>
+													<span class="text-muted"><strong>28</strong>
+														comments</span>
+												</p>
+												<div class="media align-items-center">
+													<div class="media-left mr-2">
 
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="fname">Ngày kết thúc</label> <input
-										id="flatpickrSample01" type="text" class="form-control"
-										placeholder="Flatpickr example" data-toggle="flatpickr"
-										name ="enddate" value="">
+														<div class="avatar avatar-xxs" data-toggle="tooltip"
+															data-placement="top" title="${task.username }">
+															<img
+																src="<c:url value = "${task.useravatar }"/>"
+																alt="Avatar" class="avatar-img rounded-circle">
+														</div>
 
-								</div>
+													</div>
+													<div class="media-body small media-middle"></div>
+												</div>
+											</div>
+										</div>
+									</c:if>
+								</c:forEach>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<button type="submit" class="btn btn-light">Hoàn tất</button>
-							</div>
+
+							<a href="#" class="btn btn-link text-muted btn-block mt-2">+
+								Add Card</a>
 						</div>
 					</div>
 				</div>
-			</form>
+			</c:forEach>
 		</div>
 	</div>
-
+	
 	<!-- App Settings FAB -->
 	<div id="app-settings" hidden>
 		<app-settings layout-active="fixed"
@@ -201,13 +184,9 @@
 	<!-- Global Settings -->
 	<script src="<c:url value ="/assets/js/settings.js"/>"></script>
 
-	<!-- DateRangePicker -->
-	<script src="<c:url value ="/assets/vendor/moment.min.js"/>"></script>
-	<script src="<c:url value ="/assets/vendor/daterangepicker.js"/>"></script>
-	<script src="<c:url value ="/assets/js/daterangepicker.js"/>"></script>
+	<!-- Dragula -->
+	<script src="<c:url value ="/assets/vendor/dragula/dragula.min.js"/>"></script>
+	<script src="<c:url value ="/assets/js/dragula.js"/>"></script>
 
-	<!-- Quill -->
-	<script src="<c:url value ="/assets/vendor/quill.min.js"/>"></script>
-	<script src="<c:url value ="/assets/js/quill.js"/>"></script>
 </body>
 </html>

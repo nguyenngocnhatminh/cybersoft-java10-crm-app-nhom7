@@ -11,6 +11,7 @@ public class UserProjectDto {
 	private String useremail;
 	private String userfullname;
 	private String avatar;
+	private String projectname;
 	public UserProjectDto() {
 	}
 	public UserProjectDto(int projectid, int userid, Date joinDate, String role) {
@@ -66,6 +67,12 @@ public class UserProjectDto {
 	}
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+	public String getProjectname() {
+		return projectname;
+	}
+	public void setProjectname(String projectname) {
+		this.projectname = projectname;
 	}
 	
 	
