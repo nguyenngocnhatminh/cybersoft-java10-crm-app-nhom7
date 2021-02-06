@@ -15,9 +15,14 @@ public class ProjectService {
 		return repository.getAllProject();
 	}
 	
-	public List<ProjectDto> getAllProjectsByUser(int id)
+	public List<ProjectDto> getAllProjectsByUser(int id,String rolename)
 	{
-		return repository.getAllProjectByUser(id);
+		if(rolename.equals("ROLE_LEADER"))
+			return repository.getAllProjectByUser(id);
+		else if (rolename.equals("ROLE_ADMIN"))
+			return repository.getAllProject();
+		else
+			return repository.getAllProjectByProjectUser(id);
 	}
 	
 	public ProjectDto getProjectByID(int id)

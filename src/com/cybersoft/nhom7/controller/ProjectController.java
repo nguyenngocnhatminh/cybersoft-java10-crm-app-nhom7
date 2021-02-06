@@ -39,11 +39,12 @@ public class ProjectController extends HttpServlet {
 		String action = req.getServletPath();
 		int id;
 		HttpSession session = req.getSession();
+		UserDto user = (UserDto) session.getAttribute("USER_LOGIN");
+		ProjectDto dto;
 
 		switch (action) {
 		case Path.PROJECT_INDEX:
-			UserDto user = (UserDto) session.getAttribute("USER_LOGIN");
-			List<ProjectDto> dtos = service.getAllProjectsByUser(user.getId());
+			List<ProjectDto> dtos = service.getAllProjectsByUser(user.getId(),user.getRolename());
 			req.setAttribute("projects", dtos);
 			req.getRequestDispatcher(Url.URL_PROJECT_INDEX).forward(req, resp);
 			break;
@@ -52,12 +53,21 @@ public class ProjectController extends HttpServlet {
 			break;
 		case Path.PROJECT_EDIT:
 			id = Integer.parseInt(req.getParameter("id"));
-			ProjectDto dto = service.getProjectByID(id);
+			dto = service.getProjectByID(id);
+			if (dto.getCreateuser() != user.getId() && !user.getRolename().equals("ROLE_ADMIN")) {
+				resp.sendRedirect(Path.ERROR_403);
+				return;
+			}
 			req.setAttribute("project", dto);
 			req.getRequestDispatcher(Url.URL_PROJECT_EDIT).forward(req, resp);
 			break;
 		case Path.PROJECT_DELETE:
 			id = Integer.parseInt(req.getParameter("id"));
+			dto = service.getProjectByID(id);
+			if (dto.getCreateuser() != user.getId() && !user.getRolename().equals("ROLE_ADMIN")) {
+				resp.sendRedirect(Path.ERROR_403);
+				return;
+			}
 			if (service.delete(id) < 1)
 				;
 			req.setAttribute("message", "Xóa không thành công");
@@ -65,6 +75,11 @@ public class ProjectController extends HttpServlet {
 			break;
 		case Path.PROJECT_USER:
 			id = Integer.parseInt(req.getParameter("id"));
+			dto = service.getProjectByID(id);
+			if (dto.getCreateuser() != user.getId() && !user.getRolename().equals("ROLE_ADMIN")) {
+				resp.sendRedirect(Path.ERROR_403);
+				return;
+			}
 			List<UserProjectDto> listuser = userprojectservice.getAllUserByProjectId(id);
 			req.setAttribute("userprojects", listuser);
 			req.setAttribute("projectId", id);
@@ -110,17 +125,14 @@ public class ProjectController extends HttpServlet {
 			}
 			return;
 		}
-		
-		//projectuser
-		switch(action)
-		{
+
+		// projectuser
+		switch (action) {
 		case Path.PROJECT_USER:
 			int projectid = Integer.parseInt(req.getParameter("projectId"));
 			String[] userids = req.getParameterValues("check");
-			if(userids == null)
-			{
-				if(userprojectservice.delete(projectid) < 1)
-				{
+			if (userids == null) {
+				if (userprojectservice.delete(projectid) < 1) {
 					req.setAttribute("message", "Lưu thành viên không thành công");
 					List<UserProjectDto> listuser = userprojectservice.getAllUserByProjectId(projectid);
 					req.setAttribute("userprojects", listuser);
@@ -133,14 +145,12 @@ public class ProjectController extends HttpServlet {
 			}
 			String[] joindates = new String[userids.length];
 			String[] roles = new String[userids.length];
-			for(int i  = 0 ;i <userids.length ; i++)
-			{
-				 joindates[i] = req.getParameter("joindate"+userids[i]);
-				 roles[i] = req.getParameter("role"+userids[i]);
+			for (int i = 0; i < userids.length; i++) {
+				joindates[i] = req.getParameter("joindate" + userids[i]);
+				roles[i] = req.getParameter("role" + userids[i]);
 			}
 			List<UserProjectDto> dtos = userprojectservice.ParseToUserProjectDto(userids, projectid, joindates, roles);
-			if(userprojectservice.save(dtos) < 1 )
-			{
+			if (userprojectservice.save(dtos) < 1) {
 				req.setAttribute("message", "Lưu thành viên không thành công");
 				List<UserProjectDto> listuser = userprojectservice.getAllUserByProjectId(projectid);
 				req.setAttribute("userprojects", listuser);
@@ -151,7 +161,7 @@ public class ProjectController extends HttpServlet {
 			resp.sendRedirect(req.getContextPath() + Path.PROJECT_INDEX);
 			break;
 		}
-		
+
 	}
 
 }

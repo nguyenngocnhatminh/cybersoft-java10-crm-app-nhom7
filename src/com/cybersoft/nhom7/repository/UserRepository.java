@@ -74,7 +74,7 @@ public class UserRepository {
 	public UserDto getUserByUsername(String username)
 	{
 		Connection connection = MySqlConnection.getConnection();
-		String query = "Select * from USER where username = ?";
+		String query = "Select a.*,b.name as rolename from USER a join ROLE b on a.roleId = b.id where username = ?";
 		UserDto user = null;
 		try {
 			PreparedStatement statement = connection.prepareStatement(query);
@@ -92,6 +92,7 @@ public class UserRepository {
 				user.setAvatar(rs.getString("avatar"));
 				user.setPhone(rs.getString("phone"));
 				user.setRoleid(rs.getInt("roleId"));
+				user.setRolename(rs.getString("rolename"));
 				return user;
 			}
 		} catch (SQLException e) {

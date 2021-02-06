@@ -2,6 +2,9 @@ package com.cybersoft.nhom7.util;
 
 public class Path {
 	public static final String ROOT 			= 	"/*";
+	//error
+	public static final String ERROR_404		=	"/404";
+	public static final String ERROR_403		=	"/403";
 	//asset
 	public static final String ASSETS			=	"/assets";
 	//home

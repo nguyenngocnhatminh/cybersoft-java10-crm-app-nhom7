@@ -1,3 +1,4 @@
+<%@page import="com.cybersoft.nhom7.dto.UserDto"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="com.cybersoft.nhom7.util.Path"%>
@@ -17,7 +18,8 @@
 	href="<c:url value="/assets/css/vendor-flatpickr-airbnb.rtl.css" />"
 	rel="stylesheet" />
 </head>
-
+<%UserDto dto = (UserDto)session.getAttribute("USER_LOGIN");
+String rolename = dto.getRolename();%>
 <body>
 	<div class="container page__heading-container">
 		<div class="page__heading">
@@ -31,10 +33,12 @@
 					</nav>
 					<h1 class="m-0">Quản lý dự án</h1>
 				</div>
+				<%if(rolename.equals("ROLE_ADMIN") || rolename.equals("ROLE_LEADER")){ %>
 				<div class="ml-auto">
 					<a href="<%=request.getContextPath() + Path.PROJECT_ADD%>"
 						class="btn btn-light"> Tạo mới</a>
 				</div>
+				<%} %>
 			</div>
 		</div>
 	</div>
@@ -68,7 +72,9 @@
 									<th>Ngày bắt đầu</th>
 									<th>Ngày kết thúc</th>
 									<th>Người tạo</th>
+									<%if(rolename.equals("ROLE_ADMIN") || rolename.equals("ROLE_LEADER")){ %>
 									<th>Thành viên</th>
+									<%} %>
 									<th>Task</th>
 									<th></th>
 									<th></th>
@@ -115,20 +121,23 @@
 												</div>
 											</div>
 										</td>
+										<%if(rolename.equals("ROLE_ADMIN") || rolename.equals("ROLE_LEADER")){ %>
 										<td><a class="media align-items-center"
 											href="<%=request.getContextPath()+Path.PROJECT_USER%>?id=${project.id}"
 											class="text-muted"><i class="fas fa-user"></i></a></td>
+										<%} %>
 										<td><a class="media align-items-center"
 											href="<%=request.getContextPath()+Path.TASK_INDEX%>?projectid=${project.id}"
 											class="text-muted"><i class="fas fa-tasks"></i></a></td>
 										<td><span class="badge badge-warning">${role.description}</span></td>
+										<%if(rolename.equals("ROLE_ADMIN") || rolename.equals("ROLE_LEADER")){ %>
 										<td><a
 											href="<%=request.getContextPath()+Path.PROJECT_EDIT%>?id=${project.id}"
 											class="text-muted"><i class="fas fa-edit"></i></a></td>
 										<td><a
 											href="<%=request.getContextPath()+Path.PROJECT_DELETE%>?id=${project.id}"
 											class="text-muted"><i class="fas fa-trash-alt"></i></a></td>
-
+										<%} %>
 									</tr>
 								</c:forEach>
 							</tbody>

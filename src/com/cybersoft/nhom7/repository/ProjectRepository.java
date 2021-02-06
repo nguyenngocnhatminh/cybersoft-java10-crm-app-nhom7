@@ -40,6 +40,36 @@ public class ProjectRepository {
 		return projects;
 	}
 	
+	public List<ProjectDto> getAllProjectByProjectUser(int id)
+	{
+		Connection connection = MySqlConnection.getConnection();
+		String query = "select b.*, c.username from USER_PROJECT a"
+				+ " join PROJECT b on a.projectId = b.id "
+				+ " join USER c on b.createUser = c.id"
+				+ " where userId = ? ";
+		List<ProjectDto> projects = new ArrayList<ProjectDto>();
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setInt(1, id);
+			ResultSet rs = statement.executeQuery();
+			while (rs.next())
+			{
+				ProjectDto project = new ProjectDto();
+				project.setId(rs.getInt("id"));
+				project.setName(rs.getString("name"));
+				project.setDescription(rs.getString("description"));
+				project.setStartdate(rs.getDate("startDate"));
+				project.setEnddate(rs.getDate("endDate"));
+				project.setCreateuser(rs.getInt("createUser"));
+				project.setCreateusername(rs.getString("username"));
+				projects.add(project);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return projects;
+	}
+	
 	public List<ProjectDto> getAllProjectByUser(int id)
 	{
 		Connection connection = MySqlConnection.getConnection();

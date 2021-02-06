@@ -1,3 +1,4 @@
+<%@page import="com.cybersoft.nhom7.dto.UserDto"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="com.cybersoft.nhom7.util.Path"%>
@@ -16,6 +17,9 @@
 <link type="text/css"
 	href="<c:url value="/assets/css/vendor-flatpickr-airbnb.rtl.css" />"
 	rel="stylesheet" />
+	
+<%UserDto dto = (UserDto)session.getAttribute("USER_LOGIN");
+String rolename = dto.getRolename();%>
 </head>
 
 <body>
@@ -31,10 +35,12 @@
 					</nav>
 					<h1 class="m-0">Quản lý người dùng</h1>
 				</div>
+				<%if(rolename.equals("ROLE_ADMIN")){ %>
 				<div class="ml-auto">
 					<a href="<%=request.getContextPath() + Path.USER_ADD%>"
 						class="btn btn-light"> Tạo mới</a>
 				</div>
+				<%} %>
 			</div>
 		</div>
 	</div>
@@ -97,12 +103,14 @@
 									<td>${user.address }</td>
 									<td>${user.phone }</td>
 									<td>${user.roledes }</td>
+									<%if(rolename.equals("ROLE_ADMIN")){ %>
 									<td><a
 										href="<%=request.getContextPath() + Path.USER_EDIT%>?id=${user.id}"
 										class="text-muted"><i class="fas fa-edit"></i></a></td>
 									<td><a
 										href="<%=request.getContextPath() + Path.USER_DELETE%>?id=${user.id}"
 										class="text-muted"><i class="fas fa-trash-alt"></i></a></td>
+										<%} %>
 								</tr>
 							</c:forEach>
 							</tbody>
