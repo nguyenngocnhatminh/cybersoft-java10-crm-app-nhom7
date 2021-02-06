@@ -86,6 +86,45 @@ public class TaskRepository {
 		return null;
 	}
 	
+	public List<TaskDto> getAllTaskByUserId(int userid)
+	{
+		Connection connection = MySqlConnection.getConnection();
+		String query = "SELECT a.* , b.username,c.description as statusdes ,d.name as projectname,e.description as categorydes from TASK a"
+				+ " join USER b on a.createUserId = b.id"
+				+ " join STATUS c on a.statusId = c.id"
+				+ " join PROJECT d on a. projectId = d.id"
+				+ " join TASK_CATEGORY e on a.categoryId = e.id"
+				+ " where userId = ?";
+		List<TaskDto> tasks = new ArrayList<TaskDto>();
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setInt(1, userid);
+			ResultSet rs = statement.executeQuery();
+			while (rs.next())
+			{
+				TaskDto task = new TaskDto();
+				task.setId(rs.getInt("id"));
+				task.setName(rs.getString("name"));
+				task.setDescription(rs.getString("description"));
+				task.setStartdate(rs.getDate("startdate"));
+				task.setEnddate(rs.getDate("enddate"));
+				task.setProjectid(rs.getInt("projectId"));
+				task.setUserid(rs.getInt("userId"));
+				task.setCreateuserid(rs.getInt("createUserId"));
+				task.setStatusid(rs.getInt("statusId"));
+				task.setCategoryid(rs.getInt("categoryId"));
+				task.setCategorydes(rs.getString("categorydes"));
+				task.setUsername(rs.getString("username"));
+				task.setStatusdes(rs.getString("statusdes"));
+				task.setProjectname(rs.getString("projectname"));
+				tasks.add(task);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tasks;
+	}
+	
 	
 	public int save(Task task)
 	{

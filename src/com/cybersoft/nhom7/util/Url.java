@@ -29,4 +29,5 @@ public class Url {
 	public static final String URL_TASK_INDEX		=	"/WEB-INF/views/task/index.jsp";
 	public static final String URL_TASK_ADD			=	"/WEB-INF/views/task/add.jsp";
 	public static final String URL_TASK_EDIT		=	"/WEB-INF/views/task/edit.jsp";
+	public static final String URL_TASK_USER		=	"/WEB-INF/views/usertask/index.jsp";
 }

@@ -10,6 +10,7 @@ import java.util.List;
 import com.cybersoft.nhom7.dto.ProjectDto;
 import com.cybersoft.nhom7.jdbc.MySqlConnection;
 import com.cybersoft.nhom7.model.Project;
+import com.cybersoft.nhom7.model.UserProject;
 
 public class ProjectRepository {
 	
@@ -92,20 +93,42 @@ public class ProjectRepository {
 		return null;
 	}
 	
-	
 	public int save(Project project)
 	{
 		Connection connection = MySqlConnection.getConnection();
+
 		String query = "Insert into PROJECT(name,description,startdate,enddate,createUser) values (?,?,?,?,?)";
 		System.out.println(query);
 		try {
+			connection.setAutoCommit(false);
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, project.getName());
 			statement.setString(2, project.getDescription());
 			statement.setDate(3, project.getStartdate());
 			statement.setDate(4, project.getEnddate());
 			statement.setInt(5,project.getCreateuser());
-			return statement.executeUpdate();
+			statement.executeUpdate();
+			
+			String sql = "select LAST_INSERT_ID() as id";
+			statement = connection.prepareStatement(sql);
+			ResultSet rs = statement.executeQuery();
+			int projectid = 0;
+			while(rs.next())
+			{
+				projectid = rs.getInt("id");
+				break;
+			}
+			
+			UserProjectRepository userprojectrepo = new UserProjectRepository();
+			UserProject userproject = new UserProject(projectid,project.getCreateuser(),project.getStartdate(),"ROLE_LEADER");
+			if(userprojectrepo.saveAfterSaveProject(userproject,connection) < 1)
+			{
+				return -1;
+			}
+			connection.commit();
+			connection.setAutoCommit(true);
+			return 1;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

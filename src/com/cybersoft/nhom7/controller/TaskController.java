@@ -23,7 +23,7 @@ import com.cybersoft.nhom7.service.UserProjectService;
 import com.cybersoft.nhom7.util.Path;
 import com.cybersoft.nhom7.util.Url;
 
-@WebServlet(name = "taskController", urlPatterns = {Path.TASK_INDEX,Path.TASK_ADD,Path.TASK_EDIT,Path.TASK_DELETE})
+@WebServlet(name = "taskController", urlPatterns = {Path.TASK_INDEX,Path.TASK_ADD,Path.TASK_EDIT,Path.TASK_DELETE,Path.TASK_USER})
 public class TaskController extends HttpServlet {
 	UserProjectService userservice;
 	StatusService	statusservice;
@@ -86,6 +86,13 @@ public class TaskController extends HttpServlet {
 			req.getRequestDispatcher(Url.URL_TASK_EDIT).forward(req, resp);
 			break;
 		case Path.TASK_DELETE:
+			break;
+		case Path.TASK_USER:
+			HttpSession session = req.getSession();
+			UserDto user = (UserDto) session.getAttribute("USER_LOGIN");
+			List<TaskDto> taskdto = taskservice.getTaskByUserId(user.getId());
+			req.setAttribute("task", taskdto);
+			req.getRequestDispatcher(Url.URL_TASK_USER).forward(req, resp);
 			break;
 		}
 	}

@@ -75,6 +75,24 @@ public class UserProjectRepository {
 		return projects;
 	}
 	
+	public int saveAfterSaveProject(UserProject user, Connection connection)
+	{
+		String query = "insert into USER_PROJECT values (?,?,?,?)";
+		PreparedStatement statement;
+		try {
+			statement = connection.prepareStatement(query);
+			statement.setInt(1, user.getProjectid());
+			statement.setInt(2, user.getUserid());
+			statement.setDate(3, user.getJoinDate());
+			statement.setString(4, user.getRole());
+			return statement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 	public int save(List<UserProject> dtos)
 	{
 		Connection connection = MySqlConnection.getConnection();
