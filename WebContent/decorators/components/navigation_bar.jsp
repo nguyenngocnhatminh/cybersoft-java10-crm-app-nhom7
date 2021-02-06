@@ -18,11 +18,11 @@
 					<li class="nav-item"><a class="nav-link active"
 						href="<c:url value="<%-- <%=Path.HOME %> --%>" />"> Dashboard
 					</a></li>
-					<%if(rolename == "ROLE_ADMIN"){ %>
+					<%if(rolename.equals("ROLE_ADMIN")){ %>
 					<li class="nav-item"><a class="nav-link"
 							href="<%=request.getContextPath() + Path.ROLE_INDEX%>">Role</a></li>
 					<%} %>
-					<%if(rolename == "ROLE_ADMIN" || rolename == "ROLE_LEADER"){ %>
+					<%if(rolename.equals("ROLE_ADMIN") || rolename.equals("ROLE_LEADER")){ %>
 					<li class="nav-item"><a class="nav-link"
 						href="<%=request.getContextPath() + Path.USER_INDEX%>">User</a></li>
 					<%} %>
