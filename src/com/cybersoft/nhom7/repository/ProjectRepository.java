@@ -190,9 +190,18 @@ public class ProjectRepository {
 		String query = "delete from PROJECT where id = ?";
 		System.out.println(query);
 		try {
+			connection.setAutoCommit(false);
+			String sql = "delete from USER_PROJECT where projectId = ?";
+			PreparedStatement statementSql = connection.prepareStatement(sql);
+			statementSql.setInt(1, id);
+			statementSql.executeUpdate();
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setInt(1, id);
-			return statement.executeUpdate();
+			if(statement.executeUpdate() < 1)
+				return -1;
+			connection.commit();
+			connection.setAutoCommit(true);
+			return 1;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
