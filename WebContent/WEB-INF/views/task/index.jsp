@@ -74,7 +74,6 @@
 					<h1 class="m-0">Quản lý task</h1>
 				</div>
 				<div class="ml-auto">
-
 					<a
 						href="<%=request.getContextPath() + Path.TASK_ADD%>?projectid=${projectid}"
 						class="btn btn-light"> Tạo task</a>
@@ -100,8 +99,9 @@
 										<div class="trello-board__tasks-item card shadow-none border">
 											<div class="p-3">
 												<p class="m-0 d-flex align-items-center">
-													<a href="<%=request.getContextPath()+Path.TASK_EDIT%>?id=${task.id}">${task.name}</a> <span
-														class="badge badge-light-gray ml-auto">${task.categorydes }</span>
+													<a
+														href="<%=request.getContextPath()+Path.TASK_EDIT%>?id=${task.id}">${task.name}</a>
+													<span class="badge badge-light-gray ml-auto">${task.categorydes }</span>
 												</p>
 
 												<p class="d-flex align-items-center mb-2 small">
@@ -116,8 +116,7 @@
 
 														<div class="avatar avatar-xxs" data-toggle="tooltip"
 															data-placement="top" title="${task.username }">
-															<img
-																src="<c:url value = "${task.useravatar }"/>"
+															<img src="<c:url value = "${task.useravatar }"/>"
 																alt="Avatar" class="avatar-img rounded-circle">
 														</div>
 
@@ -137,8 +136,9 @@
 				</div>
 			</c:forEach>
 		</div>
+		<button type="button" class="btn btn-success btn-rounded">Lưu</button>
 	</div>
-	
+
 	<!-- App Settings FAB -->
 	<div id="app-settings" hidden>
 		<app-settings layout-active="fixed"

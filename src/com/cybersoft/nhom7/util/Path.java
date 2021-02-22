@@ -13,6 +13,9 @@ public class Path {
 	public static final String LOGIN			=	"/login";
 	public static final String SIGNUP			=	"/signup";
 	public static final String LOGOUT			=	"/logout";
+	//profile
+	public static final String PROFILE			=	"/profile";
+	public static final String PROFILE_EDIT		=	"/profile/edit";
 	//role
 	public static final String ROLE_INDEX		=	"/role";
 	public static final String ROLE_ADD			=	"/role/add";

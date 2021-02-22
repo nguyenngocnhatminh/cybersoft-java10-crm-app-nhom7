@@ -145,9 +145,9 @@
 								<a class="dropdown-item active"
 									href="<c:url value="<%=Path.HOME%>" />"> Dashboard </a> <a
 									class="dropdown-item"
-									href="<c:url value="<%-- <%=Path.USER_PROFILE %> --%>" />">
+									href="<c:url value="<%=Path.PROFILE %>" />">
 									My profile </a> <a class="dropdown-item"
-									href="<c:url value="<%-- <%=Path.USER_EDIT %> --%>" />">
+									href="<c:url value="<%=Path.PROFILE_EDIT %>" />">
 									Edit account </a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item"

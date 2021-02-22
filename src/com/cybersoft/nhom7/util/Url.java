@@ -13,6 +13,10 @@ public class Url {
 	public static final String ERROR_404			=	"/WEB-INF/views/error/404.jsp";
 	public static final String ERROR_403			=	"/WEB-INF/views/error/403.jsp";
 	
+	//profile
+	public static final String URL_USER_PROFILE		=	"/WEB-INF/views/profile/index.jsp";
+	public static final String URL_USER_PROFILE_EDIT =	"/WEB-INF/views/profile/edit.jsp";
+	
 	//role
 	public static final String URL_ROLE_INDEX 		= 	"/WEB-INF/views/role/index.jsp";
 	public static final String URL_ROLE_ADD			= 	"/WEB-INF/views/role/add.jsp";
